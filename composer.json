@@ -1,0 +1,156 @@
+{
+  "name": "sprintive/seeds-project",
+  "description": "Kickoff distro for SME's, Curated by Sprintive.",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^8.1",
+    "composer/composer": "^2",
+    "composer/installers": "^2.0",
+    "drupal/core-composer-scaffold": "^10.0",
+    "sprintive/seeds_headless": "1.x-dev"
+  },
+  "require-dev": {
+    "drupal/coder": "8.*",
+    "cweagans/composer-patches": "^1.7.3",
+    "oomphinc/composer-installers-extender": "^2" 
+  },
+  "patchLevel": {
+    "drupal/core": "-p2"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "config": {
+    "bin-dir": "bin/",
+    "secure-http": false,
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "oomphinc/composer-installers-extender": true,
+      "drupal/console-extend-plugin": true,
+      "drupal/core-composer-scaffold": true
+    }
+  },
+  "autoload": {
+    "classmap": [
+      "scripts/composer/ScriptHandler.php"
+    ]
+  },
+  "scripts": {
+    "drupal-scaffold": "@composer drupal:scaffold",
+    "init-translations-yml": "Seeds\\composer\\ScriptHandler::moveTranslationsYmlFile",
+    "post-install-cmd": [
+      "@composer drupal-scaffold",
+      "@composer init-translations-yml",
+      "Seeds\\composer\\ScriptHandler::removeGitDirectories"
+    ],
+    "post-update-cmd": [
+      "@composer drupal-scaffold",
+      "@composer init-translations-yml",
+      "Seeds\\composer\\ScriptHandler::removeGitDirectories"
+    ]
+  },
+  "extra": {
+    "installer-types": [
+      "npm-asset"
+    ],
+    "installer-paths": {
+      "public_html/core": [
+        "type:drupal-core"
+      ],
+      "public_html/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
+      "public_html/libraries/ace": [
+        "npm-asset/ace-builds"
+      ],
+      "public_html/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "public_html/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "public_html/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/contrib/{$name}": [
+        "type:drupal-drush"
+      ]
+    },
+    "enable-patching": true,
+    "composer-exit-on-patch-failure": false,
+    "drupal-scaffold": {
+      "locations": {
+        "web-root": "./public_html"
+      },
+      "file-mapping": {
+        "[web-root]/sites/default/default.settings.php": "assets/default.settings.php",
+        "[web-root]/sites/default/development.services.yml": {
+          "mode": "replace",
+          "path": "assets/development.services.yml",
+          "overwrite": false
+        },
+        "[web-root]/sites/default/settings.fast404.php": {
+          "mode": "replace",
+          "path": "assets/settings.fast404.php",
+          "overwrite": false
+        },
+        "[web-root]/themes/404/404.html": {
+          "mode": "replace",
+          "path": "assets/404/404.html",
+          "overwrite": false
+        },
+        "[web-root]/themes/404/404-ar.html": {
+          "mode": "replace",
+          "path": "assets/404/404-ar.html",
+          "overwrite": false
+        },
+        "[web-root]/themes/404/style.css": {
+          "mode": "replace",
+          "path": "assets/404/style.css",
+          "overwrite": false
+        },
+        "[web-root]/themes/404/style-rtl.css": {
+          "mode": "replace",
+          "path": "assets/404/style-rtl.css",
+          "overwrite": false
+        },
+        "drush/drush.yml": {
+          "mode": "replace",
+          "path": "assets/drush.yml",
+          "overwrite": false
+        }
+      }
+    }
+  },
+  "authors": [
+    {
+      "name": "Sprintive",
+      "homepage": "http://sprintive.com",
+      "role": "Supporting Organization"
+    },
+    {
+      "name": "Mohammad Abdul-Qader",
+      "homepage": "https://www.drupal.org/u/mabdulqader",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "issues": "http://drupal.org/project/issues/seeds",
+    "source": "http://cgit.drupalcode.org/seeds",
+    "email": "info@sprintive.com"
+  }
+}

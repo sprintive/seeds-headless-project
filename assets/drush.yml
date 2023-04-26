@@ -1,0 +1,6 @@
+command:
+  sql:
+    dump:
+      options:
+        structure-tables-list: "search_total,search_index,redirect_404,search_api_db_search_inde*"
+        skip-tables-key: "cache,cache_*"
