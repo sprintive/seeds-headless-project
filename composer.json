@@ -10,12 +10,11 @@
     "composer/composer": "^2",
     "composer/installers": "^2.0",
     "drupal/core-composer-scaffold": "^10.0",
-    "sprintive/seeds_headless": "1.x-dev"
-  },
-  "require-dev": {
     "drupal/coder": "8.*",
     "cweagans/composer-patches": "^1.7.3",
-    "oomphinc/composer-installers-extender": "^2" 
+    "oomphinc/composer-installers-extender": "^2",
+    "zaporylie/composer-drupal-optimizations": "^1.0",
+    "sprintive/seeds_headless": "1.x-dev"
   },
   "patchLevel": {
     "drupal/core": "-p2"
@@ -25,9 +24,8 @@
       "type": "composer",
       "url": "https://packages.drupal.org/8",
       "exclude": [
-        "drupal/fast_404",
-        "drupal/ckeditor_iframe"
-    ]
+        "drupal/fast_404"
+      ]
     },
     {
       "type": "composer",
@@ -36,11 +34,7 @@
     {
       "type": "git",
       "url": "https://git.drupalcode.org/issue/fast_404-3287465.git"
-  },
-  {
-  "type": "git",
-  "url": "https://git.drupalcode.org/issue/ckeditor_iframe-3286496.git"
-  }
+    }
   ],
   "config": {
     "bin-dir": "bin/",
@@ -51,7 +45,8 @@
       "cweagans/composer-patches": true,
       "oomphinc/composer-installers-extender": true,
       "drupal/console-extend-plugin": true,
-      "drupal/core-composer-scaffold": true
+      "drupal/core-composer-scaffold": true,
+      "zaporylie/composer-drupal-optimizations": true
     }
   },
   "autoload": {
@@ -65,12 +60,14 @@
     "post-install-cmd": [
       "@composer drupal-scaffold",
       "@composer init-translations-yml",
-      "Seeds\\composer\\ScriptHandler::removeGitDirectories"
+      "Seeds\\composer\\ScriptHandler::removeGitDirectories",
+      "Seeds\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-update-cmd": [
       "@composer drupal-scaffold",
       "@composer init-translations-yml",
-      "Seeds\\composer\\ScriptHandler::removeGitDirectories"
+      "Seeds\\composer\\ScriptHandler::removeGitDirectories",
+      "Seeds\\composer\\ScriptHandler::createRequiredFiles"
     ]
   },
   "extra": {
