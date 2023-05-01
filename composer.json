@@ -27,7 +27,7 @@
         "drupal/fast_404",
         "drupal/ckeditor_iframe",
         "drupal/jsonapi_response_alter",
-        "drupal/jsonapi_search_api"
+        "drupal/layoutbuilder_search_api"
       ]
     },
     {
