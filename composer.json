@@ -24,7 +24,10 @@
       "type": "composer",
       "url": "https://packages.drupal.org/8",
       "exclude": [
-        "drupal/fast_404"
+        "drupal/fast_404",
+        "drupal/ckeditor_iframe",
+        "drupal/jsonapi_response_alter",
+        "drupal/jsonapi_search_api"
       ]
     },
     {
@@ -34,6 +37,18 @@
     {
       "type": "git",
       "url": "https://git.drupalcode.org/issue/fast_404-3287465.git"
+    },
+    {
+      "type": "git",
+      "url": "https://git.drupalcode.org/issue/jsonapi_response_alter-3288148.git"
+    },
+    {
+      "type": "git",
+      "url": "https://git.drupalcode.org/issue/ckeditor_iframe-3286496.git"
+    },
+    {
+      "type": "git",
+      "url": "https://git.drupalcode.org/issue/layoutbuilder_search_api-3288250.git"
     }
   ],
   "config": {
