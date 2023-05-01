@@ -2,6 +2,10 @@
 namespace Seeds\composer;
 
 use Composer\Script\Event;
+use Drupal\Core\Site\Settings;
+use DrupalFinder\DrupalFinder;
+use Symfony\Component\Filesystem\Filesystem;
+use Webmozart\PathUtil\Path;
 
 /**
  * Seeds Composer Script Handler.
