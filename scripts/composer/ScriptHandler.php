@@ -43,6 +43,16 @@ class ScriptHandler
     }
   }
 
+    /**
+   * Moves the 'translations.yml' file from the root to Drupal Root.
+   */
+  public static function moveTranslationsYmlFile() {
+    $root = getcwd();
+    if (file_exists("$root/translations.yml")) {
+      exec("mv $root/translations.yml $root/public_html/translations.yml");
+    }
+  }
+
   public static function createRequiredFiles(Event $event) {
     $fs = new Filesystem();
     $drupalFinder = new DrupalFinder();
@@ -70,12 +80,12 @@ class ScriptHandler
       require_once $drupalRoot . '/core/includes/install.inc';
       new Settings([]);
       $settings['settings']['config_sync_directory'] = (object) [
-        'value' => Path::makeRelative($drupalFinder->getComposerRoot() . '/config/sync', $drupalRoot),
+        'value' => Path::makeRelative('sites/default/config', $drupalRoot),
         'required' => TRUE,
       ];
       drupal_rewrite_settings($settings, $drupalRoot . '/sites/default/settings.php');
-      $fs->chmod($drupalRoot . '/sites/default/settings.php', 0666);
-      $event->getIO()->write("Created a sites/default/settings.php file with chmod 0666");
+      $fs->chmod($drupalRoot . '/sites/default/settings.php', 0777);
+      $event->getIO()->write("Created a sites/default/settings.php file with chmod 0777");
     }
 
     // Create the files directory with chmod 0777
@@ -84,6 +94,13 @@ class ScriptHandler
       $fs->mkdir($drupalRoot . '/sites/default/files', 0777);
       umask($oldmask);
       $event->getIO()->write("Created a sites/default/files directory with chmod 0777");
+    }
+    // Create the config directory with chmod 0777
+    if (!$fs->exists($drupalRoot . '/sites/default/config')) {
+      $oldmask = umask(0);
+      $fs->mkdir($drupalRoot . '/sites/default/config', 0777);
+      umask($oldmask);
+      $event->getIO()->write("Created a sites/default/config directory with chmod 0777");
     }
   }
 }
