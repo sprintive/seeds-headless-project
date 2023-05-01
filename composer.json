@@ -17,9 +17,6 @@
     "webmozart/path-util": "^2.3",
     "sprintive/seeds_headless": "1.x-dev"
   },
-  "patchLevel": {
-    "drupal/core": "-p2"
-  },
   "repositories": [
     {
       "type": "composer",
@@ -116,6 +113,9 @@
       ]
     },
     "enable-patching": true,
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
     "composer-exit-on-patch-failure": false,
     "drupal-scaffold": {
       "locations": {

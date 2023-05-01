@@ -102,5 +102,12 @@ class ScriptHandler
       umask($oldmask);
       $event->getIO()->write("Created a sites/default/config directory with chmod 0777");
     }
+    // Create the config directory with chmod 0777
+    if (!$fs->exists($drupalRoot . '/sites/default/local.settings.inc')) {
+      $oldmask = umask(0);
+      $fs->touch($drupalRoot . '/sites/default/local.settings.inc');
+      umask($oldmask);
+      $event->getIO()->write("Created a sites/default/local.settings.inc directory with chmod 0777");
+    }
   }
 }
