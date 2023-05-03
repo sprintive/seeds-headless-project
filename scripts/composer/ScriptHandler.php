@@ -102,6 +102,14 @@ class ScriptHandler
       umask($oldmask);
       $event->getIO()->write("Created a sites/default/config directory with chmod 0777");
     }
+    $pathKey = dirname($drupalRoot) . '/key';
+    // Create the key directory with chmod 0777
+    if (!$fs->exists($pathKey)) {
+      $oldmask = umask(0);
+      $fs->mkdir($pathKey, 0777);
+      umask($oldmask);
+      $event->getIO()->write("Created a key directory with chmod 0777");
+    }
     // Create the config directory with chmod 0777
     if (!$fs->exists($drupalRoot . '/sites/default/local.settings.inc')) {
       $oldmask = umask(0);
